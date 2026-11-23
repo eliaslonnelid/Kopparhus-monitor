@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+from datetime import datetime
 
 URL = "https://kopparhus.se/lediga-objekt/"
 
@@ -57,6 +58,10 @@ for apartment in matches:
         )
 
 
+# TEST AV SCHEDULER
+send_push(
+    f"Scheduler test\n\nKördes: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+)
+
 with open(STATE_FILE, "w") as f:
     json.dump(matches, f)
-    
