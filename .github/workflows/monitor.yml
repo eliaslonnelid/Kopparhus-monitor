@@ -1,13 +1,12 @@
-permissions:
-  contents: write
-
 name: Kopparhus Monitor
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
-
+    - cron: '*/5 * * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   check:
@@ -20,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -30,7 +29,7 @@ jobs:
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
         run: python monitor.py
-        
+
       - name: Save state
         run: |
           git config user.name "github-actions"
