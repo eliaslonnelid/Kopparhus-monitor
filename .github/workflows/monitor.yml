@@ -1,3 +1,6 @@
+permissions:
+  contents: write
+
 name: Kopparhus Monitor
 
 on:
@@ -28,3 +31,15 @@ jobs:
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
         run: python monitor.py
         
+      - name: Save state
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add seen.json
+
+          git diff --staged --quiet || git commit -m "Update seen apartments"
+
+          git pull --rebase origin main
+
+          git push origin HEAD:main
