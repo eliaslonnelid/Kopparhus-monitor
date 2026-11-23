@@ -54,3 +54,5 @@ for apartment in matches:
 
 with open(STATE_FILE, "w") as f:
     json.dump(matches, f)
+
+# trigger schedule
